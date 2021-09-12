@@ -1,0 +1,5 @@
+#@data/values
+---
+services:
+  port: 443
+image: "projects.registry.vmware.com/antrea/antrea-ubuntu:v1.3.0"

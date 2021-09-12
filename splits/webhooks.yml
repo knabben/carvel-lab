@@ -7,6 +7,8 @@ labels: #@ labels()
 name: #@ name
 #@ end
 
+#! todo(knabben) - overlay testing with webhooks.rules[0].operations = UPDATE
+
 apiVersion: admissionregistration.k8s.io/v1
 kind: MutatingWebhookConfiguration
 metadata: #@ metadata("crdmutator.antrea.io")

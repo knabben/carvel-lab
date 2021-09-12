@@ -1,3 +1,5 @@
+#@ load("@ytt:data", "data")
+
 apiVersion: v1
 data:
   antrea-agent.conf: |
@@ -261,7 +263,7 @@ metadata:
   namespace: kube-system
 spec:
   ports:
-    - port: 443
+    - port: #@ data.values.services.port
       protocol: TCP
       targetPort: api
   selector:
@@ -321,7 +323,7 @@ spec:
                   fieldPath: spec.serviceAccountName
             - name: ANTREA_CONFIG_MAP_NAME
               value: antrea-config-mc8h75hbgg
-          image: projects.registry.vmware.com/antrea/antrea-ubuntu:v1.3.0
+          image: #@ data.values.image
           livenessProbe:
             failureThreshold: 5
             httpGet:
@@ -518,7 +520,7 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: spec.nodeName
-          image: projects.registry.vmware.com/antrea/antrea-ubuntu:v1.3.0
+          image: #@ data.values.image
           livenessProbe:
             exec:
               command:
@@ -578,7 +580,7 @@ spec:
             - --log_file_max_num=4
           command:
             - start_ovs
-          image: projects.registry.vmware.com/antrea/antrea-ubuntu:v1.3.0
+          image: #@ data.values.image
           livenessProbe:
             exec:
               command:
@@ -612,7 +614,7 @@ spec:
       initContainers:
         - command:
             - install_cni
-          image: projects.registry.vmware.com/antrea/antrea-ubuntu:v1.3.0
+          image: #@ data.values.image
           name: install-cni
           resources:
             requests:
